@@ -56,6 +56,8 @@ export default class DatePicker extends React.Component {
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
     onMonthChange: PropTypes.func,
+    onHourChange: PropTypes.func,
+    onMinuteChange: PropTypes.func,
     openToDate: PropTypes.object,
     peekNextMonth: PropTypes.bool,
     placeholderText: PropTypes.string,
@@ -65,12 +67,15 @@ export default class DatePicker extends React.Component {
     readOnly: PropTypes.bool,
     required: PropTypes.bool,
     scrollableYearDropdown: PropTypes.bool,
+    scrollableTimeDropdown: PropTypes.bool,
     selected: PropTypes.object,
     selectsEnd: PropTypes.bool,
     selectsStart: PropTypes.bool,
     showMonthDropdown: PropTypes.bool,
     showWeekNumbers: PropTypes.bool,
     showYearDropdown: PropTypes.bool,
+    showHours: PropTypes.bool,
+    showMinutes: PropTypes.bool,
     forceShowMonthNavigation: PropTypes.bool,
     startDate: PropTypes.object,
     tabIndex: PropTypes.number,
@@ -81,7 +86,8 @@ export default class DatePicker extends React.Component {
     value: PropTypes.string,
     weekLabel: PropTypes.string,
     withPortal: PropTypes.bool,
-    yearDropdownItemNumber: PropTypes.number
+    yearDropdownItemNumber: PropTypes.number,
+    timeValueFilter: PropTypes.func
   }
 
   static get defaultProps () {
@@ -99,6 +105,8 @@ export default class DatePicker extends React.Component {
       onSelect () {},
       onClickOutside () {},
       onMonthChange () {},
+      onHourChange () {},
+      onMinuteChange () {},
       utcOffset: moment().utcOffset(),
       monthsShown: 1,
       withPortal: false
@@ -227,8 +235,8 @@ export default class DatePicker extends React.Component {
       if (changedDate !== null) {
         if (this.props.selected) {
           changedDate = moment(changedDate).set({
-            hour: this.props.selected.hour(),
-            minute: this.props.selected.minute(),
+            /*hour: this.props.selected.hour(),
+            minute: this.props.selected.minute(),*/
             second: this.props.selected.second()
           })
         }
@@ -362,8 +370,11 @@ export default class DatePicker extends React.Component {
         showMonthDropdown={this.props.showMonthDropdown}
         showWeekNumbers={this.props.showWeekNumbers}
         showYearDropdown={this.props.showYearDropdown}
+        showHours={this.props.showHours}
+        showMinutes={this.props.showMinutes}
         forceShowMonthNavigation={this.props.forceShowMonthNavigation}
         scrollableYearDropdown={this.props.scrollableYearDropdown}
+        scrollableTimeDropdown={this.props.scrollableTimeDropdown}
         todayButton={this.props.todayButton}
         weekLabel={this.props.weekLabel}
         utcOffset={this.props.utcOffset}
@@ -372,8 +383,11 @@ export default class DatePicker extends React.Component {
         monthsShown={this.props.monthsShown}
         onDropdownFocus={this.handleDropdownFocus}
         onMonthChange={this.props.onMonthChange}
+        onHourChange={this.props.onHourChange}
+        onMinuteChange={this.props.onMinuteChange}
         dayClassName={this.props.dayClassName}
         className={this.props.calendarClassName}
+        timeValueFilter={this.props.timeValueFilter}
         yearDropdownItemNumber={this.props.yearDropdownItemNumber}>
       {this.props.children}
     </WrappedCalendar>

@@ -3,13 +3,17 @@ import YearDropdown from './year_dropdown'
 import MonthDropdown from './month_dropdown'
 import Month from './month'
 import React from 'react'
+import TimeDropdown from './time_dropdown'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { isSameDay, allDaysDisabledBefore, allDaysDisabledAfter, getEffectiveMinDate, getEffectiveMaxDate } from './date_utils'
 
 const DROPDOWN_FOCUS_CLASSNAMES = [
   'react-datepicker__year-select',
-  'react-datepicker__month-select'
+  'react-datepicker__month-select',
+  'react-datepicker__time-select',
+  'react-datepicker__minute-select',
+  'react-datepicker__hour-select'
 ]
 
 const isDropdownSelect = (element = {}) => {
@@ -48,6 +52,7 @@ export default class Calendar extends React.Component {
     openToDate: PropTypes.object,
     peekNextMonth: PropTypes.bool,
     scrollableYearDropdown: PropTypes.bool,
+    scrollableTimeDropdown: PropTypes.bool,
     preSelection: PropTypes.object,
     selected: PropTypes.object,
     selectsEnd: PropTypes.bool,
@@ -55,12 +60,15 @@ export default class Calendar extends React.Component {
     showMonthDropdown: PropTypes.bool,
     showWeekNumbers: PropTypes.bool,
     showYearDropdown: PropTypes.bool,
+    showHours: PropTypes.bool,
+    showMinutes: PropTypes.bool,
     startDate: PropTypes.object,
     todayButton: PropTypes.string,
     useWeekdaysShort: PropTypes.bool,
     utcOffset: PropTypes.number,
     weekLabel: PropTypes.string,
-    yearDropdownItemNumber: PropTypes.number
+    yearDropdownItemNumber: PropTypes.number,
+    timeValueFilter: PropTypes.func
   }
 
   static get defaultProps () {
@@ -146,6 +154,18 @@ export default class Calendar extends React.Component {
     }
   }
 
+  handleHourChange = (date) => {
+    if (this.props.onHourChange) {
+      this.props.onHourChange(date)
+    }
+  }
+
+  handleMinuteChange = (date) => {
+    if (this.props.onMinuteChange) {
+      this.props.onMinuteChange(date)
+    }
+  }
+
   changeYear = (year) => {
     this.setState({
       date: this.state.date.clone().set('year', year)
@@ -156,6 +176,20 @@ export default class Calendar extends React.Component {
     this.setState({
       date: this.state.date.clone().set('month', month)
     }, () => this.handleMonthChange(this.state.date))
+  }
+
+  changeHour = (hour) => {
+    this.props.selected.set('hour', hour)
+    this.setState({
+      date: this.state.date.clone().set('hour', hour)
+    }, () => this.handleHourChange(this.state.date))
+  }
+
+  changeMinute = (minute) => {
+    this.props.selected.set('minute', minute)
+    this.setState({
+      date: this.state.date.clone().set('minute', minute)
+    }, () => this.handleMinuteChange(this.state.date))
   }
 
   header = (date = this.state.date) => {
@@ -222,7 +256,7 @@ export default class Calendar extends React.Component {
     return (
       <YearDropdown
           dropdownMode={this.props.dropdownMode}
-          onChange={this.changeYear}
+          onChange={() => {}}
           minDate={this.props.minDate}
           maxDate={this.props.maxDate}
           year={this.state.date.year()}
@@ -243,6 +277,44 @@ export default class Calendar extends React.Component {
           onChange={this.changeMonth}
           month={this.state.date.month()} />
     )
+  }
+
+
+
+  renderTime() {
+    let renderElems = [];
+    if (this.props.showHours) {
+      renderElems.push(
+          <TimeDropdown 
+            key="hourdrop"
+            dropdownMode={this.props.dropdownMode}
+            isHour={true} 
+            onChange={this.changeHour}
+            dateFormat={this.props.dateFormat}
+            scrollableTimeDropdown={this.props.scrollableTimeDropdown}
+            timeValueFilter={this.props.timeValueFilter}
+            value={this.state.date.hour()} />
+      );
+    }
+    if (this.props.showMinutes && this.props.showHours) 
+      renderElems.push(
+        <span key="colon">:</span>
+      )
+    if (this.props.showMinutes) {
+      renderElems.push(
+          <TimeDropdown 
+            key="minutedrop"
+            dropdownMode={this.props.dropdownMode}
+            isHour={false} 
+            onChange={this.changeMinute}
+            dateFormat={this.props.dateFormat}
+            scrollableTimeDropdown={this.props.scrollableTimeDropdown}
+            timeValueFilter={this.props.timeValueFilter}
+            value={this.state.date.minute()} />
+      );
+    }
+
+    return renderElems;
   }
 
   renderTodayButton = () => {
@@ -303,6 +375,14 @@ export default class Calendar extends React.Component {
                 endDate={this.props.endDate}
                 peekNextMonth={this.props.peekNextMonth}
                 utcOffset={this.props.utcOffset}/>
+
+            <div className="react-datepicker__footer">
+              <div
+                  className={`react-datepicker__header__dropdown react-datepicker__header__dropdown--${this.props.dropdownMode}`}
+                  onFocus={this.handleDropdownFocus}>
+                {this.renderTime()}
+              </div>
+            </div>
           </div>
       )
     }

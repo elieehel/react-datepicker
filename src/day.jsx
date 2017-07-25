@@ -176,7 +176,8 @@ export default class Day extends React.Component {
           onClick={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
           aria-label={`day-${this.props.day.date()}`}
-          role="option">
+          role="option"
+          title={this.props.day.hour()}>
           {this.props.day.date()}
       </div>
     )
