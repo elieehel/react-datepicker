@@ -26,12 +26,16 @@ export default class PopperComponent extends React.Component {
     popperComponent: PropTypes.element,
     popperModifiers: PropTypes.object, // <datepicker/> props
     popperPlacement: PropTypes.oneOf(popperPlacementPositions), // <datepicker/> props
-    targetComponent: PropTypes.element
+    targetComponent: PropTypes.element,
+    popperClassName: PropTypes.string,
+    targetClassName: PropTypes.string
   }
 
   static get defaultProps () {
     return {
       hidePopper: true,
+      popperClassName: "react-datepicker-popper",
+      targetClassName: "react-datepicker-wrapper",
       popperModifiers: {
         preventOverflow: {
           enabled: true,
@@ -47,20 +51,22 @@ export default class PopperComponent extends React.Component {
     const {
       hidePopper,
       popperComponent,
+      popperClassName,
       popperModifiers,
       popperPlacement,
-      targetComponent
+      targetComponent,
+      targetClassName
     } = this.props
 
     return (
       <Manager>
-        <Target className="react-datepicker-wrapper">
+        <Target className={targetClassName}>
           {targetComponent}
         </Target>
         {
           !hidePopper &&
           <Popper
-              className="react-datepicker-popper"
+              className={popperClassName}
               modifiers={popperModifiers}
               placement={popperPlacement}>
             {popperComponent}

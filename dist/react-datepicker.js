@@ -487,12 +487,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      return _react2.default.createElement(_popper_component2.default, {
-	        className: this.props.popperClassName,
+	        popperClassName: this.props.popperClassName,
+	        targetClassName: this.props.targetClassName,
 	        hidePopper: !this.state.open || this.props.disabled,
 	        popperModifiers: this.props.popperModifiers,
 	        targetComponent: _react2.default.createElement(
 	          'div',
-	          { className: this.props.containerClass || "react-datepicker__input-container" },
+	          { className: this.props.containerClassName || "react-datepicker__input-container" },
 	          this.renderDateInput(),
 	          this.renderClearButton()
 	        ),
@@ -549,6 +550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  peekNextMonth: _propTypes2.default.bool,
 	  placeholderText: _propTypes2.default.string,
 	  popperClassName: _propTypes2.default.string, // <PopperComponent/> props
+	  targetClassName: _propTypes2.default.string,
 	  popperModifiers: _propTypes2.default.object, // <PopperComponent/> props
 	  popperPlacement: _propTypes2.default.oneOf(_popper_component.popperPlacementPositions), // <PopperComponent/> props
 	  readOnly: _propTypes2.default.bool,
@@ -575,7 +577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  withPortal: _propTypes2.default.bool,
 	  yearDropdownItemNumber: _propTypes2.default.number,
 	  timeValueFilter: _propTypes2.default.func,
-	  containerClass: _propTypes2.default.string
+	  containerClassName: _propTypes2.default.string
 	};
 	exports.default = DatePicker;
 
@@ -3020,9 +3022,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _props = this.props,
 	          hidePopper = _props.hidePopper,
 	          popperComponent = _props.popperComponent,
+	          popperClassName = _props.popperClassName,
 	          popperModifiers = _props.popperModifiers,
 	          popperPlacement = _props.popperPlacement,
-	          targetComponent = _props.targetComponent;
+	          targetComponent = _props.targetComponent,
+	          targetClassName = _props.targetClassName;
 
 
 	      return _react2.default.createElement(
@@ -3030,13 +3034,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        null,
 	        _react2.default.createElement(
 	          _reactPopper.Target,
-	          { className: 'react-datepicker-wrapper' },
+	          { className: targetClassName },
 	          targetComponent
 	        ),
 	        !hidePopper && _react2.default.createElement(
 	          _reactPopper.Popper,
 	          {
-	            className: 'react-datepicker-popper',
+	            className: popperClassName,
 	            modifiers: popperModifiers,
 	            placement: popperPlacement },
 	          popperComponent
@@ -3048,6 +3052,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    get: function get() {
 	      return {
 	        hidePopper: true,
+	        popperClassName: "react-datepicker-popper",
+	        targetClassName: "react-datepicker-wrapper",
 	        popperModifiers: {
 	          preventOverflow: {
 	            enabled: true,
@@ -3068,7 +3074,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  popperComponent: _propTypes2.default.element,
 	  popperModifiers: _propTypes2.default.object, // <datepicker/> props
 	  popperPlacement: _propTypes2.default.oneOf(popperPlacementPositions), // <datepicker/> props
-	  targetComponent: _propTypes2.default.element
+	  targetComponent: _propTypes2.default.element,
+	  popperClassName: _propTypes2.default.string,
+	  targetClassName: _propTypes2.default.string
 	};
 	exports.default = PopperComponent;
 

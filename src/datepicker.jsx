@@ -62,6 +62,7 @@ export default class DatePicker extends React.Component {
     peekNextMonth: PropTypes.bool,
     placeholderText: PropTypes.string,
     popperClassName: PropTypes.string, // <PopperComponent/> props
+    targetClassName: PropTypes.string,
     popperModifiers: PropTypes.object, // <PopperComponent/> props
     popperPlacement: PropTypes.oneOf(popperPlacementPositions), // <PopperComponent/> props
     readOnly: PropTypes.bool,
@@ -88,7 +89,7 @@ export default class DatePicker extends React.Component {
     withPortal: PropTypes.bool,
     yearDropdownItemNumber: PropTypes.number,
     timeValueFilter: PropTypes.func,
-    containerClass: PropTypes.string
+    containerClassName: PropTypes.string
   }
 
   static get defaultProps () {
@@ -466,11 +467,12 @@ export default class DatePicker extends React.Component {
 
     return (
       <PopperComponent
-          className={this.props.popperClassName}
+          popperClassName={this.props.popperClassName}
+          targetClassName={this.props.targetClassName}
           hidePopper={(!this.state.open || this.props.disabled)}
           popperModifiers={this.props.popperModifiers}
           targetComponent={
-            <div className={this.props.containerClass || "react-datepicker__input-container"}> 
+            <div className={this.props.containerClassName || "react-datepicker__input-container"}> 
               {this.renderDateInput()}
               {this.renderClearButton()}
             </div>
