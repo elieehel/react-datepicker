@@ -88,7 +88,8 @@ export default class DatePicker extends React.Component {
     weekLabel: PropTypes.string,
     withPortal: PropTypes.bool,
     yearDropdownItemNumber: PropTypes.number,
-    timeValueFilter: PropTypes.func,
+    hourValueFilter: PropTypes.func,
+    minuteValueFilter: PropTypes.func,
     containerClassName: PropTypes.string
   }
 
@@ -389,7 +390,8 @@ export default class DatePicker extends React.Component {
         onMinuteChange={this.props.onMinuteChange}
         dayClassName={this.props.dayClassName}
         className={this.props.calendarClassName}
-        timeValueFilter={this.props.timeValueFilter}
+        hourValueFilter={this.props.hourValueFilter}
+        minuteValueFilter={this.props.minuteValueFilter}
         yearDropdownItemNumber={this.props.yearDropdownItemNumber}>
       {this.props.children}
     </WrappedCalendar>

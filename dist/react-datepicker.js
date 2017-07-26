@@ -408,7 +408,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onMinuteChange: _this.props.onMinuteChange,
 	          dayClassName: _this.props.dayClassName,
 	          className: _this.props.calendarClassName,
-	          timeValueFilter: _this.props.timeValueFilter,
+	          hourValueFilter: _this.props.hourValueFilter,
+	          minuteValueFilter: _this.props.minuteValueFilter,
 	          yearDropdownItemNumber: _this.props.yearDropdownItemNumber },
 	        _this.props.children
 	      );
@@ -576,7 +577,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  weekLabel: _propTypes2.default.string,
 	  withPortal: _propTypes2.default.bool,
 	  yearDropdownItemNumber: _propTypes2.default.number,
-	  timeValueFilter: _propTypes2.default.func,
+	  hourValueFilter: _propTypes2.default.func,
+	  minuteValueFilter: _propTypes2.default.func,
 	  containerClassName: _propTypes2.default.string
 	};
 	exports.default = DatePicker;
@@ -985,7 +987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onChange: this.changeHour,
 	          dateFormat: this.props.dateFormat,
 	          scrollableTimeDropdown: this.props.scrollableTimeDropdown,
-	          timeValueFilter: this.props.timeValueFilter,
+	          timeValueFilter: this.props.hourValueFilter,
 	          value: this.state.date.hour() }));
 	      }
 	      if (this.props.showMinutes && this.props.showHours) renderElems.push(_react2.default.createElement(
@@ -1001,7 +1003,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onChange: this.changeMinute,
 	          dateFormat: this.props.dateFormat,
 	          scrollableTimeDropdown: this.props.scrollableTimeDropdown,
-	          timeValueFilter: this.props.timeValueFilter,
+	          timeValueFilter: this.props.minuteValueFilter,
 	          value: this.state.date.minute() }));
 	      }
 
@@ -1069,7 +1071,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  utcOffset: _propTypes2.default.number,
 	  weekLabel: _propTypes2.default.string,
 	  yearDropdownItemNumber: _propTypes2.default.number,
-	  timeValueFilter: _propTypes2.default.func
+	  hourValueFilter: _propTypes2.default.func,
+	  minuteValueFilter: _propTypes2.default.func
 	};
 	exports.default = Calendar;
 

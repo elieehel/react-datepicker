@@ -68,7 +68,8 @@ export default class Calendar extends React.Component {
     utcOffset: PropTypes.number,
     weekLabel: PropTypes.string,
     yearDropdownItemNumber: PropTypes.number,
-    timeValueFilter: PropTypes.func
+    hourValueFilter: PropTypes.func,
+    minuteValueFilter: PropTypes.func
   }
 
   static get defaultProps () {
@@ -292,7 +293,7 @@ export default class Calendar extends React.Component {
             onChange={this.changeHour}
             dateFormat={this.props.dateFormat}
             scrollableTimeDropdown={this.props.scrollableTimeDropdown}
-            timeValueFilter={this.props.timeValueFilter}
+            timeValueFilter={this.props.hourValueFilter}
             value={this.state.date.hour()} />
       );
     }
@@ -309,7 +310,7 @@ export default class Calendar extends React.Component {
             onChange={this.changeMinute}
             dateFormat={this.props.dateFormat}
             scrollableTimeDropdown={this.props.scrollableTimeDropdown}
-            timeValueFilter={this.props.timeValueFilter}
+            timeValueFilter={this.props.minuteValueFilter}
             value={this.state.date.minute()} />
       );
     }
