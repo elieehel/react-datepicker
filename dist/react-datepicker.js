@@ -135,7 +135,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        utcOffset: (0, _moment2.default)().utcOffset(),
 	        monthsShown: 1,
-	        withPortal: false
+	        withPortal: false,
+	        noWrapper: false
 	      };
 	    }
 	  }]);
@@ -486,6 +487,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	      }
 
+	      if (this.props.noWrapper) {
+	        return [this.renderDateInput(), this.renderClearButton()];
+	      }
+
 	      return _react2.default.createElement(_popper_component2.default, {
 	        className: this.props.popperClassName,
 	        hidePopper: !this.state.open || this.props.disabled,
@@ -574,7 +579,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  weekLabel: _propTypes2.default.string,
 	  withPortal: _propTypes2.default.bool,
 	  yearDropdownItemNumber: _propTypes2.default.number,
-	  timeValueFilter: _propTypes2.default.func
+	  timeValueFilter: _propTypes2.default.func,
+	  noWrapper: _propTypes2.default.bool
 	};
 	exports.default = DatePicker;
 
