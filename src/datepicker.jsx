@@ -463,6 +463,13 @@ export default class DatePicker extends React.Component {
       )
     }
 
+    if (this.props.noWrapper) {
+      return [
+        this.renderDateInput(),
+        this.renderClearButton()
+      ];
+    }
+
     return (
       <PopperComponent
           className={this.props.popperClassName}
