@@ -135,8 +135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        utcOffset: (0, _moment2.default)().utcOffset(),
 	        monthsShown: 1,
-	        withPortal: false,
-	        noWrapper: false
+	        withPortal: false
 	      };
 	    }
 	  }]);
@@ -487,20 +486,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	      }
 
-	      if (this.props.noWrapper) {
-	        var a = [];
-	        a.push(this.renderDateInput());
-	        if (this.props.isClearable && this.props.selected != null) a.push(this.renderClearButton());
-	        return this.state.open ? calendar : this.renderDateInput();
-	      }
-
 	      return _react2.default.createElement(_popper_component2.default, {
 	        className: this.props.popperClassName,
 	        hidePopper: !this.state.open || this.props.disabled,
 	        popperModifiers: this.props.popperModifiers,
 	        targetComponent: _react2.default.createElement(
 	          'div',
-	          { className: 'react-datepicker__input-container' },
+	          { className: this.props.containerClass || "react-datepicker__input-container" },
 	          this.renderDateInput(),
 	          this.renderClearButton()
 	        ),
@@ -583,7 +575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  withPortal: _propTypes2.default.bool,
 	  yearDropdownItemNumber: _propTypes2.default.number,
 	  timeValueFilter: _propTypes2.default.func,
-	  noWrapper: _propTypes2.default.bool
+	  containerClass: _propTypes2.default.string
 	};
 	exports.default = DatePicker;
 

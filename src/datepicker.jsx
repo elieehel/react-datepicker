@@ -88,7 +88,7 @@ export default class DatePicker extends React.Component {
     withPortal: PropTypes.bool,
     yearDropdownItemNumber: PropTypes.number,
     timeValueFilter: PropTypes.func,
-    noWrapper: PropTypes.bool
+    containerClass: PropTypes.string
   }
 
   static get defaultProps () {
@@ -110,8 +110,7 @@ export default class DatePicker extends React.Component {
       onMinuteChange () {},
       utcOffset: moment().utcOffset(),
       monthsShown: 1,
-      withPortal: false,
-      noWrapper: false
+      withPortal: false
     }
   }
 
@@ -465,20 +464,13 @@ export default class DatePicker extends React.Component {
       )
     }
 
-    if (this.props.noWrapper) {
-      return [
-        this.renderDateInput(),
-        this.renderClearButton()
-      ];
-    }
-
     return (
       <PopperComponent
           className={this.props.popperClassName}
           hidePopper={(!this.state.open || this.props.disabled)}
           popperModifiers={this.props.popperModifiers}
           targetComponent={
-            <div className="react-datepicker__input-container">
+            <div className={this.props.containerClass || "react-datepicker__input-container"}> 
               {this.renderDateInput()}
               {this.renderClearButton()}
             </div>
