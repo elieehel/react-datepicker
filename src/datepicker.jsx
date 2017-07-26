@@ -87,7 +87,8 @@ export default class DatePicker extends React.Component {
     weekLabel: PropTypes.string,
     withPortal: PropTypes.bool,
     yearDropdownItemNumber: PropTypes.number,
-    timeValueFilter: PropTypes.func
+    timeValueFilter: PropTypes.func,
+    noWrapper: PropTypes.bool
   }
 
   static get defaultProps () {
@@ -109,7 +110,8 @@ export default class DatePicker extends React.Component {
       onMinuteChange () {},
       utcOffset: moment().utcOffset(),
       monthsShown: 1,
-      withPortal: false
+      withPortal: false,
+      noWrapper: false
     }
   }
 
