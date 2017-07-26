@@ -491,7 +491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var a = [];
 	        a.push(this.renderDateInput());
 	        if (this.props.isClearable && this.props.selected != null) a.push(this.renderClearButton());
-	        return a;
+	        return this.renderDateInput();
 	      }
 
 	      return _react2.default.createElement(_popper_component2.default, {
